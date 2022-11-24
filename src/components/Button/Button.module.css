@@ -22,6 +22,7 @@
 .button.size-small {
   font-size: 0.75rem;
   padding: 0.5em;
+  font-weight: normal;
 }
 .button.size-large {
   font-size: 1.125rem;
