@@ -1,0 +1,21 @@
+name: 'Chromatic'
+on: push
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v2
+        with:
+          # actions/checkoutはv2以降、デフォルトでは時間短縮のため1つのコミットしか取得しなくなりました
+          # Chromaticはすべての履歴が必要なため、fetch-depth: 0を指定します
+          fetch-depth: 0
+      - name: パッケージのインストール
+        run: npm ci
+
+        # Chromaticから提供されるアクションを実行
+      - name: Chromaticへ公開
+        uses: chromaui/action@v1
+        with:
+          # Chromaticで生成したプロジェクトトークンを指定
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
